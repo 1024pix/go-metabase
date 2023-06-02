@@ -36,6 +36,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Database'
+  /api/database/{databaseId}/metadata:
+    get:
+      summary: Get metadata about a Database.
+      operationId: databaseMetadata
+      tags:
+        - database
+      description: Get metadata about a Database, including all of its Tables and Fields. Returns DB, fields, and field values. By default only non-hidden tables and fields are returned.
+      parameters:
+        - in: path
+          name: databaseId
+          required: true
+          schema:
+            type: integer
+            minimum: 1      
+          description: The database ID
+        - name: include_hidden
+          in: query
+          description: show hidden tables and fields.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: include_editable_data_model
+          in: query
+          description: return tables for which the current user has data model editing permissions.
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
   /api/dataset:
     post:
       summary: Execute a query

@@ -25,11 +25,7 @@ java -jar openapi-generator-cli.jar generate \
 echo -e "\n\nfunc (apiClient *APIClient) HTTPClient() *http.Client { return apiClient.cfg.HTTPClient }" >> metabase/client.go
 gofmt -s -w metabase/*.go
 
-<<<<<<< HEAD
 rm -rf metabase/test
-=======
-rm -rf metagase/test
->>>>>>> 66ee384 (Update to openapi generator 6.0.0)
 rm -f metabase/go.*
 rm -f metabase/git_push.sh
 rm -rf ../metabase
