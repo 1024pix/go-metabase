@@ -77,6 +77,7 @@ All URIs are relative to *http://example.com/api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DatabaseApi* | [**DatabaseMetadata**](docs/DatabaseApi.md#databasemetadata) | **Get** /api/database/{databaseId}/metadata | Get metadata about a Database.
 *DatabaseApi* | [**ListDatabases**](docs/DatabaseApi.md#listdatabases) | **Get** /api/database | List Databases
 *DatasetApi* | [**QueryDatabase**](docs/DatasetApi.md#querydatabase) | **Post** /api/dataset | Execute a query
 
