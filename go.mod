@@ -2,8 +2,6 @@ module github.com/grokify/go-metabase
 
 go 1.18
 
-//replace github.com/grokify/goauth => /home/emeric/metabase/goauth
-
 require (
 	github.com/grokify/go-simplekpi v0.1.20
 	github.com/grokify/goauth v0.18.0
