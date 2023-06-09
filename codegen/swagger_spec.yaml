@@ -92,6 +92,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatasetQueryResults'
+  /api/permissions/group:
+    get:
+      summary: Fetch all permissions group.
+      operationId: getPermissionsGroup
+      tags:
+        - groups
+      description: Fetch all PermissionsGroups, including a count of the number of :members in that group. This API requires superuser or group manager of more than one group. Group manager is only available if advanced-permissions is enabled and returns only groups that user is manager of.
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PermissionGroup'
 components:
   schemas:
     DatabaseDetails:
@@ -446,3 +462,12 @@ components:
           type: string
         special_type:
           type: string
+    PermissionGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        member_count:
+          type: integer

@@ -5,6 +5,7 @@ README.md
 api/openapi.yaml
 api_database.go
 api_dataset.go
+api_groups.go
 client.go
 configuration.go
 docs/Database.md
@@ -28,6 +29,8 @@ docs/DatasetQueryResultsData.md
 docs/DatasetQueryResultsMetadata.md
 docs/DatasetQueryResultsMetadataColumn.md
 docs/DatasetQueryResultsNativeForm.md
+docs/GroupsApi.md
+docs/PermissionGroup.md
 git_push.sh
 go.mod
 go.sum
@@ -50,7 +53,9 @@ model_dataset_query_results_data.go
 model_dataset_query_results_metadata.go
 model_dataset_query_results_metadata_column.go
 model_dataset_query_results_native_form.go
+model_permission_group.go
 response.go
 test/api_database_test.go
 test/api_dataset_test.go
+test/api_groups_test.go
 utils.go
