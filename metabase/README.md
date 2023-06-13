@@ -80,7 +80,8 @@ Class | Method | HTTP request | Description
 *DatabaseApi* | [**DatabaseMetadata**](docs/DatabaseApi.md#databasemetadata) | **Get** /api/database/{databaseId}/metadata | Get metadata about a Database.
 *DatabaseApi* | [**ListDatabases**](docs/DatabaseApi.md#listdatabases) | **Get** /api/database | List Databases
 *DatasetApi* | [**QueryDatabase**](docs/DatasetApi.md#querydatabase) | **Post** /api/dataset | Execute a query
-*GroupsApi* | [**GetPermissionsGroup**](docs/GroupsApi.md#getpermissionsgroup) | **Get** /api/permissions/group | Fetch all permissions group.
+*PermissionsApi* | [**GetPermissionsGraph**](docs/PermissionsApi.md#getpermissionsgraph) | **Get** /api/permissions/graph | Fetch a graph of execution permissions.
+*PermissionsApi* | [**GetPermissionsGroup**](docs/PermissionsApi.md#getpermissionsgroup) | **Get** /api/permissions/group | Fetch all permissions group.
 
 
 ## Documentation For Models
@@ -104,7 +105,9 @@ Class | Method | HTTP request | Description
  - [DatasetQueryResultsMetadata](docs/DatasetQueryResultsMetadata.md)
  - [DatasetQueryResultsMetadataColumn](docs/DatasetQueryResultsMetadataColumn.md)
  - [DatasetQueryResultsNativeForm](docs/DatasetQueryResultsNativeForm.md)
+ - [PermissionGraphData](docs/PermissionGraphData.md)
  - [PermissionGroup](docs/PermissionGroup.md)
+ - [PermissionsGraph](docs/PermissionsGraph.md)
 
 
 ## Documentation For Authorization

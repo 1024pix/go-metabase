@@ -92,12 +92,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatasetQueryResults'
+  /api/permissions/graph:
+    get:
+      summary: Fetch a graph of execution permissions.
+      operationId: getPermissionsGraph
+      tags:
+        - permissions
+      description: Fetch a graph of execution permissions.
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsGraph'
   /api/permissions/group:
     get:
       summary: Fetch all permissions group.
       operationId: getPermissionsGroup
       tags:
-        - groups
+        - permissions
       description: Fetch all PermissionsGroups, including a count of the number of :members in that group. This API requires superuser or group manager of more than one group. Group manager is only available if advanced-permissions is enabled and returns only groups that user is manager of.
       responses:
         '200':
@@ -471,3 +485,22 @@ components:
           type: string
         member_count:
           type: integer
+    PermissionsGraph:
+      type: object
+      properties:
+        revision:
+          type: integer
+        groups:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/PermissionGraphData'
+    PermissionGraphData:
+      type: object
+      properties:
+        download: 
+          type: object
+        data:
+          type: object
+

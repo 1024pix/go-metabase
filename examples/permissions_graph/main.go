@@ -41,7 +41,7 @@ func main() {
 		SessionID:     os.Getenv("METABASE_SESSION_ID"),
 		TLSSkipVerify: stringsutil.ToBool(os.Getenv("METABASE_TLS_SKIP_VERIFY"))}
 
-	err = clientCfg.Validate()
+	//err = clientCfg.Validate()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -51,7 +51,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = printPermissionsGroup(apiClient)
+	err = printPermissionsGraph(apiClient)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -59,19 +59,18 @@ func main() {
 	fmt.Println("DONE")
 }
 
-func printPermissionsGroup(apiClient *metabase.APIClient) error {
+func printPermissionsGraph(apiClient *metabase.APIClient) error {
 
-	request := apiClient.PermissionsApi.GetPermissionsGroup(context.Background())
+	request := apiClient.PermissionsApi.GetPermissionsGraph(context.Background())
 
-	permissionsGroup, resp, err := apiClient.PermissionsApi.GetPermissionsGroupExecute(request)
+	peg, resp, err := apiClient.PermissionsApi.GetPermissionsGraphExecute(request)
 	if err != nil {
 		return err
 	} else if resp.StatusCode >= 300 {
 		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
 	}
 
-	for _, permission := range permissionsGroup {
-		fmt.Printf("PERMISSION_ID [%v] PERMISSION_NAME [%v] PERMISSION_MEMBER_COUNT [%v]\n", *permission.Id, *permission.Name, *permission.MemberCount)
-	}
+	fmt.Printf("REVISION [%d]\n", *peg.Revision)
+	fmt.Printf("%+v\n", peg.Groups)
 	return nil
 }

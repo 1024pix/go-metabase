@@ -110,6 +110,20 @@ paths:
       summary: Execute a query
       tags:
       - dataset
+  /api/permissions/graph:
+    get:
+      description: Fetch a graph of execution permissions.
+      operationId: getPermissionsGraph
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsGraph'
+          description: successful operation
+      summary: Fetch a graph of execution permissions.
+      tags:
+      - permissions
   /api/permissions/group:
     get:
       description: "Fetch all PermissionsGroups, including a count of the number of\
@@ -128,7 +142,7 @@ paths:
           description: successful operation
       summary: Fetch all permissions group.
       tags:
-      - groups
+      - permissions
 components:
   schemas:
     DatabaseDetails:
@@ -842,4 +856,32 @@ components:
           type: string
         member_count:
           type: integer
+      type: object
+    PermissionsGraph:
+      example:
+        groups:
+          key:
+            key:
+              download: "{}"
+              data: "{}"
+        revision: 0
+      properties:
+        revision:
+          type: integer
+        groups:
+          additionalProperties:
+            additionalProperties:
+              $ref: '#/components/schemas/PermissionGraphData'
+            type: object
+          type: object
+      type: object
+    PermissionGraphData:
+      example:
+        download: "{}"
+        data: "{}"
+      properties:
+        download:
+          type: object
+        data:
+          type: object
       type: object
