@@ -1,8 +1,9 @@
-module github.com/grokify/go-metabase
+module github.com/1024pix/go-metabase
 
 go 1.18
 
 require (
+	github.com/grokify/go-metabase v0.1.18
 	github.com/grokify/go-simplekpi v0.1.20
 	github.com/grokify/goauth v0.19.0
 	github.com/grokify/gocharts/v2 v2.9.1
