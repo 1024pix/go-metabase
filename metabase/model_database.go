@@ -35,9 +35,9 @@ type Database struct {
 	UpdatedAt         *time.Time `json:"updated_at,omitempty"`
 	NativePermissions *string    `json:"native_permissions,omitempty"`
 	// type unknown
-	PointsOfInterest *string          `json:"points_of_interest,omitempty"`
-	Details          *DatabaseDetails `json:"details,omitempty"`
-	Tables           []DatabaseTable  `json:"tables,omitempty"`
+	PointsOfInterest *string                `json:"points_of_interest,omitempty"`
+	Details          map[string]interface{} `json:"details,omitempty"`
+	Tables           []DatabaseTable        `json:"tables,omitempty"`
 }
 
 // NewDatabase instantiates a new Database object
@@ -499,19 +499,19 @@ func (o *Database) SetPointsOfInterest(v string) {
 }
 
 // GetDetails returns the Details field value if set, zero value otherwise.
-func (o *Database) GetDetails() DatabaseDetails {
+func (o *Database) GetDetails() map[string]interface{} {
 	if o == nil || IsNil(o.Details) {
-		var ret DatabaseDetails
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Details
+	return o.Details
 }
 
 // GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Database) GetDetailsOk() (*DatabaseDetails, bool) {
+func (o *Database) GetDetailsOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Details) {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
 	return o.Details, true
 }
@@ -525,9 +525,9 @@ func (o *Database) HasDetails() bool {
 	return false
 }
 
-// SetDetails gets a reference to the given DatabaseDetails and assigns it to the Details field.
-func (o *Database) SetDetails(v DatabaseDetails) {
-	o.Details = &v
+// SetDetails gets a reference to the given map[string]interface{} and assigns it to the Details field.
+func (o *Database) SetDetails(v map[string]interface{}) {
+	o.Details = v
 }
 
 // GetTables returns the Tables field value if set, zero value otherwise.

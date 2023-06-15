@@ -8,11 +8,10 @@ import (
 
 	"github.com/jessevdk/go-flags"
 
-	"github.com/grokify/go-metabase/metabase"
-	"github.com/grokify/go-metabase/metabaseutil"
+	"github.com/1024pix/go-metabase/metabase"
+	"github.com/1024pix/go-metabase/metabaseutil"
 	mo "github.com/grokify/goauth/metabase"
 	"github.com/grokify/mogo/config"
-	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/strconv/strconvutil"
 )
@@ -22,11 +21,12 @@ type optionsDbList struct {
 }
 
 func main() {
-	loaded, err := config.LoadDotEnv([]string{os.Getenv("ENV_PATH")}, 1)
+	read, err := config.LoadDotEnv([]string{
+		os.Getenv("ENV_PATH"), ".env"}, -1)
 	if err != nil {
-		log.Fatal(errorsutil.Wrap(err, "E_LOAD_ENV"))
+		log.Fatal(err)
 	}
-	fmtutil.PrintJSON(loaded)
+	fmtutil.PrintJSON(read)
 
 	opts := optionsDbList{}
 	_, err = flags.Parse(&opts)
@@ -75,7 +75,7 @@ func printDatabaseList(apiClient *metabase.APIClient, verbose bool) error {
 		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
 	}
 
-	for _, db := range info {
+	for _, db := range info.Data {
 		fmt.Printf("DB_ID [%v] DB_NAME [%v]\n", db.Id, db.Name)
 		fmtutil.PrintJSON(db)
 		if verbose {

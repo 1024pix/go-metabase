@@ -85,7 +85,7 @@ No authorization required
 
 ## ListDatabases
 
-> []Database ListDatabases(ctx).IncludeTables(includeTables).IncludeCards(includeCards).Execute()
+> DatabaseList ListDatabases(ctx).IncludeTables(includeTables).IncludeCards(includeCards).Execute()
 
 List Databases
 
@@ -114,7 +114,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DatabaseApi.ListDatabases``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListDatabases`: []Database
+    // response from `ListDatabases`: DatabaseList
     fmt.Fprintf(os.Stdout, "Response from `DatabaseApi.ListDatabases`: %v\n", resp)
 }
 ```
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Database**](Database.md)
+[**DatabaseList**](DatabaseList.md)
 
 ### Authorization
 

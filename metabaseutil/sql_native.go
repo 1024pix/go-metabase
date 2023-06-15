@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/grokify/go-metabase/metabase"
+	"github.com/1024pix/go-metabase/metabase"
 	"github.com/grokify/gocharts/v2/data/timeseries"
 	"github.com/grokify/mogo/net/http/httputilmore"
 	"github.com/grokify/mogo/net/urlutil"

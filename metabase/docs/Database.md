@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 **NativePermissions** | Pointer to **string** |  | [optional] 
 **PointsOfInterest** | Pointer to **string** | type unknown | [optional] 
-**Details** | Pointer to [**DatabaseDetails**](DatabaseDetails.md) |  | [optional] 
+**Details** | Pointer to **map[string]interface{}** |  | [optional] 
 **Tables** | Pointer to [**[]DatabaseTable**](DatabaseTable.md) |  | [optional] 
 
 ## Methods
@@ -387,20 +387,20 @@ HasPointsOfInterest returns a boolean if a field has been set.
 
 ### GetDetails
 
-`func (o *Database) GetDetails() DatabaseDetails`
+`func (o *Database) GetDetails() map[string]interface{}`
 
 GetDetails returns the Details field if non-nil, zero value otherwise.
 
 ### GetDetailsOk
 
-`func (o *Database) GetDetailsOk() (*DatabaseDetails, bool)`
+`func (o *Database) GetDetailsOk() (*map[string]interface{}, bool)`
 
 GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDetails
 
-`func (o *Database) SetDetails(v DatabaseDetails)`
+`func (o *Database) SetDetails(v map[string]interface{})`
 
 SetDetails sets Details field to given value.
 

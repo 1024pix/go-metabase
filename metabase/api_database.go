@@ -168,7 +168,7 @@ func (r ApiListDatabasesRequest) IncludeCards(includeCards bool) ApiListDatabase
 	return r
 }
 
-func (r ApiListDatabasesRequest) Execute() ([]Database, *http.Response, error) {
+func (r ApiListDatabasesRequest) Execute() (*DatabaseList, *http.Response, error) {
 	return r.ApiService.ListDatabasesExecute(r)
 }
 
@@ -189,13 +189,13 @@ func (a *DatabaseApiService) ListDatabases(ctx context.Context) ApiListDatabases
 
 // Execute executes the request
 //
-//	@return []Database
-func (a *DatabaseApiService) ListDatabasesExecute(r ApiListDatabasesRequest) ([]Database, *http.Response, error) {
+//	@return DatabaseList
+func (a *DatabaseApiService) ListDatabasesExecute(r ApiListDatabasesRequest) (*DatabaseList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []Database
+		localVarReturnValue *DatabaseList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DatabaseApiService.ListDatabases")

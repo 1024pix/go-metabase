@@ -33,9 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Database'
+                $ref: '#/components/schemas/DatabaseList'
   /api/database/{databaseId}/metadata:
     get:
       summary: Get metadata about a Database.
@@ -124,27 +122,17 @@ paths:
                   $ref: '#/components/schemas/PermissionGroup'
 components:
   schemas:
-    DatabaseDetails:
+    DatabaseList:
       type: object
       properties:
-        host:
-          type: string
-        port:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Database'
+        total:
           type: integer
-          format: int32
-        dbname:
-          type: string
-        authMech:
-          type: integer
-          format: int32
-        user:
-          type: string
-        password:
-          type: string
-        connProperties:
-          type: string
-        let-user-control-scheduling:
-          type: boolean
+    DatabaseDetails:
+      type: object
     DatabaseTable:
       type: object
       properties:

@@ -87,7 +87,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Database](docs/Database.md)
- - [DatabaseDetails](docs/DatabaseDetails.md)
+ - [DatabaseList](docs/DatabaseList.md)
  - [DatabaseTable](docs/DatabaseTable.md)
  - [DatasetQueryConstraints](docs/DatasetQueryConstraints.md)
  - [DatasetQueryDsl](docs/DatasetQueryDsl.md)

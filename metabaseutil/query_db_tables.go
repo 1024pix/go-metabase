@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/grokify/go-metabase/metabase"
+	"github.com/1024pix/go-metabase/metabase"
 )
 
 func GetTableBySQLName(apiClient *metabase.APIClient, tableName string) (*metabase.Database, *metabase.DatabaseTable, error) {
@@ -23,7 +23,7 @@ func GetTableBySQLName(apiClient *metabase.APIClient, tableName string) (*metaba
 		return nil, nil, fmt.Errorf("bad API ssatus code [%v]", resp.StatusCode)
 	}
 
-	for _, db := range info {
+	for _, db := range info.Data {
 		for _, tb := range db.Tables {
 			if *tb.Name == tableName {
 				return &db, &tb, nil
@@ -31,4 +31,5 @@ func GetTableBySQLName(apiClient *metabase.APIClient, tableName string) (*metaba
 		}
 	}
 	return nil, nil, fmt.Errorf("table [%s] not found", tableName)
+
 }

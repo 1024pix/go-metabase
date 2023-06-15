@@ -10,7 +10,7 @@ client.go
 configuration.go
 docs/Database.md
 docs/DatabaseApi.md
-docs/DatabaseDetails.md
+docs/DatabaseList.md
 docs/DatabaseTable.md
 docs/DatasetApi.md
 docs/DatasetQueryConstraints.md
@@ -37,7 +37,7 @@ git_push.sh
 go.mod
 go.sum
 model_database.go
-model_database_details.go
+model_database_list.go
 model_database_table.go
 model_dataset_query_constraints.go
 model_dataset_query_dsl.go
