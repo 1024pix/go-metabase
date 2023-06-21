@@ -149,22 +149,173 @@ func (a *DatabaseApiService) DatabaseMetadataExecute(r ApiDatabaseMetadataReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListDatabasesRequest struct {
-	ctx           context.Context
-	ApiService    *DatabaseApiService
-	includeTables *bool
-	includeCards  *bool
+type ApiGetDatabaseRequest struct {
+	ctx                      context.Context
+	ApiService               *DatabaseApiService
+	databaseId               int32
+	include                  *string
+	includeEditableDataModel *bool
+	excludeUneditableDetails *bool
 }
 
 // value may be nil, or if non-nil, value must be a valid boolean string (&#39;true&#39; or &#39;false&#39;).
-func (r ApiListDatabasesRequest) IncludeTables(includeTables bool) ApiListDatabasesRequest {
-	r.includeTables = &includeTables
+func (r ApiGetDatabaseRequest) Include(include string) ApiGetDatabaseRequest {
+	r.include = &include
+	return r
+}
+
+// will only include DBs for which the current user has data model editing permissions. (If include&#x3D;tables, this also applies to the list of tables in each DB). Should only be used if Enterprise Edition code is available the advanced-permissions feature is enabled.
+func (r ApiGetDatabaseRequest) IncludeEditableDataModel(includeEditableDataModel bool) ApiGetDatabaseRequest {
+	r.includeEditableDataModel = &includeEditableDataModel
+	return r
+}
+
+// will only include DBs for which the current user can edit the DB details. Has no effect unless Enterprise Edition code is available and the advanced-permissions feature is enabled.
+func (r ApiGetDatabaseRequest) ExcludeUneditableDetails(excludeUneditableDetails bool) ApiGetDatabaseRequest {
+	r.excludeUneditableDetails = &excludeUneditableDetails
+	return r
+}
+
+func (r ApiGetDatabaseRequest) Execute() (*Database, *http.Response, error) {
+	return r.ApiService.GetDatabaseExecute(r)
+}
+
+/*
+GetDatabase List Databases
+
+Fetch one Databases. include_tables means we should hydrate the Tables belonging to each DB. include_cards here means we should also include virtual Table entries for saved Questions, e.g. so we can easily use them as source Tables in queries. Default for both is false.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param databaseId The database ID
+	@return ApiGetDatabaseRequest
+*/
+func (a *DatabaseApiService) GetDatabase(ctx context.Context, databaseId int32) ApiGetDatabaseRequest {
+	return ApiGetDatabaseRequest{
+		ApiService: a,
+		ctx:        ctx,
+		databaseId: databaseId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return Database
+func (a *DatabaseApiService) GetDatabaseExecute(r ApiGetDatabaseRequest) (*Database, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Database
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DatabaseApiService.GetDatabase")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/database/{databaseId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"databaseId"+"}", url.PathEscape(parameterValueToString(r.databaseId, "databaseId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.databaseId < 1 {
+		return localVarReturnValue, nil, reportError("databaseId must be greater than 1")
+	}
+
+	if r.include != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include", r.include, "")
+	}
+	if r.includeEditableDataModel != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_editable_data_model", r.includeEditableDataModel, "")
+	}
+	if r.excludeUneditableDetails != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "exclude_uneditable_details", r.excludeUneditableDetails, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListDatabasesRequest struct {
+	ctx                      context.Context
+	ApiService               *DatabaseApiService
+	include                  *string
+	saved                    *bool
+	includeEditableDataModel *bool
+	excludeUneditableDetails *bool
+}
+
+// value may be nil, or if non-nil, value must be a valid boolean string (&#39;true&#39; or &#39;false&#39;).
+func (r ApiListDatabasesRequest) Include(include string) ApiListDatabasesRequest {
+	r.include = &include
 	return r
 }
 
 // value may be nil, or if non-nil, value must be a valid boolean string (&#39;true&#39; or &#39;false&#39;).
-func (r ApiListDatabasesRequest) IncludeCards(includeCards bool) ApiListDatabasesRequest {
-	r.includeCards = &includeCards
+func (r ApiListDatabasesRequest) Saved(saved bool) ApiListDatabasesRequest {
+	r.saved = &saved
+	return r
+}
+
+// will only include DBs for which the current user has data model editing permissions. (If include&#x3D;tables, this also applies to the list of tables in each DB). Should only be used if Enterprise Edition code is available the advanced-permissions feature is enabled.
+func (r ApiListDatabasesRequest) IncludeEditableDataModel(includeEditableDataModel bool) ApiListDatabasesRequest {
+	r.includeEditableDataModel = &includeEditableDataModel
+	return r
+}
+
+// will only include DBs for which the current user can edit the DB details. Has no effect unless Enterprise Edition code is available and the advanced-permissions feature is enabled.
+func (r ApiListDatabasesRequest) ExcludeUneditableDetails(excludeUneditableDetails bool) ApiListDatabasesRequest {
+	r.excludeUneditableDetails = &excludeUneditableDetails
 	return r
 }
 
@@ -209,11 +360,17 @@ func (a *DatabaseApiService) ListDatabasesExecute(r ApiListDatabasesRequest) (*D
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.includeTables != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_tables", r.includeTables, "")
+	if r.include != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include", r.include, "")
 	}
-	if r.includeCards != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_cards", r.includeCards, "")
+	if r.saved != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "saved", r.saved, "")
+	}
+	if r.includeEditableDataModel != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_editable_data_model", r.includeEditableDataModel, "")
+	}
+	if r.excludeUneditableDetails != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "exclude_uneditable_details", r.excludeUneditableDetails, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -11,8 +11,8 @@ import (
 	"github.com/grokify/mogo/type/stringsutil"
 	"github.com/jessevdk/go-flags"
 
-	"github.com/grokify/go-metabase/metabase"
-	"github.com/grokify/go-metabase/metabaseutil"
+	"github.com/1024pix/go-metabase/metabase"
+	"github.com/1024pix/go-metabase/metabaseutil"
 	mo "github.com/grokify/goauth/metabase"
 )
 
@@ -73,12 +73,12 @@ func printDatabaseMetadata(apiClient *metabase.APIClient, verbose bool, dbId int
 		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
 	}
 
-	fmt.Printf("DB_ID [%v] DB_NAME [%v]\n", db.Id, db.Name)
+	fmt.Printf("DB_ID [%v] DB_NAME [%v]\n", db.Id, *db.Name)
 	fmtutil.PrintJSON(db)
 	if verbose {
 		for _, tb := range db.Tables {
 			fmt.Printf("DB_ID [%v] DB_NAME [%v] TB_ID [%v] TB_NAME [%v] [%v]\n",
-				db.Id, db.Name, tb.Id, tb.Name, tb)
+				db.Id, *db.Name, tb.Id, *tb.Name, tb)
 			fmtutil.PrintJSON(tb)
 		}
 	}

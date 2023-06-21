@@ -17,7 +17,9 @@ import (
 )
 
 type Options struct {
-	Env string `short:"e" long:"envfile" description:"Env File" required:"false"`
+	Env     string `short:"e" long:"envfile" description:"Env File" required:"false"`
+	Id      int32  `short:"i" long:"databaseId" description:"The Id of database to get metadata" required:"true"`
+	Verbose bool   `short:"v" long:"verbose" description:"Verbose - Include Hidden" required:"false"`
 }
 
 func main() {
@@ -51,7 +53,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = printPermissionsGroup(apiClient)
+	err = printDatabase(apiClient, opts.Verbose, opts.Id)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -59,19 +61,20 @@ func main() {
 	fmt.Println("DONE")
 }
 
-func printPermissionsGroup(apiClient *metabase.APIClient) error {
+func printDatabase(apiClient *metabase.APIClient, verbose bool, dbId int32) error {
 
-	request := apiClient.PermissionsApi.GetPermissionsGroup(context.Background())
+	request := apiClient.DatabaseApi.GetDatabase(context.Background(), dbId)
+	request = request.Include("tables")
 
-	permissionsGroup, resp, err := apiClient.PermissionsApi.GetPermissionsGroupExecute(request)
+	db, resp, err := apiClient.DatabaseApi.GetDatabaseExecute(request)
 	if err != nil {
 		return err
 	} else if resp.StatusCode >= 300 {
 		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
 	}
 
-	for _, permission := range permissionsGroup {
-		fmt.Printf("PERMISSION_ID [%v] PERMISSION_NAME [%v] PERMISSION_MEMBER_COUNT [%v]\n", *permission.Id, *permission.Name, *permission.MemberCount)
-	}
+	fmt.Printf("DB_ID [%v] DB_NAME [%v]\n", db.Id, *db.Name)
+	fmtutil.PrintJSON(db)
+
 	return nil
 }

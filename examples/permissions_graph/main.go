@@ -11,8 +11,8 @@ import (
 	"github.com/grokify/mogo/type/stringsutil"
 	"github.com/jessevdk/go-flags"
 
-	"github.com/grokify/go-metabase/metabase"
-	"github.com/grokify/go-metabase/metabaseutil"
+	"github.com/1024pix/go-metabase/metabase"
+	"github.com/1024pix/go-metabase/metabaseutil"
 	mo "github.com/grokify/goauth/metabase"
 )
 

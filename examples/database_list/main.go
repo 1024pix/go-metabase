@@ -66,7 +66,7 @@ func main() {
 func printDatabaseList(apiClient *metabase.APIClient, verbose bool) error {
 
 	request := apiClient.DatabaseApi.ListDatabases(context.Background())
-	request.IncludeTables(true)
+	request = request.Include("tables")
 
 	info, resp, err := apiClient.DatabaseApi.ListDatabasesExecute(request)
 	if err != nil {
@@ -76,12 +76,12 @@ func printDatabaseList(apiClient *metabase.APIClient, verbose bool) error {
 	}
 
 	for _, db := range info.Data {
-		fmt.Printf("DB_ID [%v] DB_NAME [%v]\n", db.Id, db.Name)
+		fmt.Printf("DB_ID [%v] DB_NAME [%v]\n", db.Id, *db.Name)
 		fmtutil.PrintJSON(db)
 		if verbose {
 			for _, tb := range db.Tables {
 				fmt.Printf("DB_ID [%v] DB_NAME [%v] TB_ID [%v] TB_NAME [%v] [%v]\n",
-					db.Id, db.Name, tb.Id, tb.Name, tb)
+					db.Id, *db.Name, tb.Id, *tb.Name, tb)
 				fmtutil.PrintJSON(tb)
 			}
 		}

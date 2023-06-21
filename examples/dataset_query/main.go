@@ -8,8 +8,8 @@ import (
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/jessevdk/go-flags"
 
-	"github.com/grokify/go-metabase/metabase"
-	mbu "github.com/grokify/go-metabase/metabaseutil"
+	"github.com/1024pix/go-metabase/metabase"
+	mbu "github.com/1024pix/go-metabase/metabaseutil"
 )
 
 func main() {

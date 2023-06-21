@@ -17,17 +17,40 @@ paths:
           \ string ('true' or 'false')."
         explode: true
         in: query
-        name: include_tables
+        name: include
         required: false
         schema:
-          default: false
-          type: boolean
+          default: tables
+          type: string
         style: form
       - description: "value may be nil, or if non-nil, value must be a valid boolean\
           \ string ('true' or 'false')."
         explode: true
         in: query
-        name: include_cards
+        name: saved
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: "will only include DBs for which the current user has data model\
+          \ editing permissions. (If include=tables, this also applies to the list\
+          \ of tables in each DB). Should only be used if Enterprise Edition code\
+          \ is available the advanced-permissions feature is enabled."
+        explode: true
+        in: query
+        name: include_editable_data_model
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: will only include DBs for which the current user can edit the
+          DB details. Has no effect unless Enterprise Edition code is available and
+          the advanced-permissions feature is enabled.
+        explode: true
+        in: query
+        name: exclude_uneditable_details
         required: false
         schema:
           default: false
@@ -39,6 +62,66 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatabaseList'
+          description: successful operation
+      summary: List Databases
+      tags:
+      - database
+  /api/database/{databaseId}:
+    get:
+      description: "Fetch one Databases. include_tables means we should hydrate the\
+        \ Tables belonging to each DB. include_cards here means we should also include\
+        \ virtual Table entries for saved Questions, e.g. so we can easily use them\
+        \ as source Tables in queries. Default for both is false."
+      operationId: getDatabase
+      parameters:
+      - description: The database ID
+        explode: false
+        in: path
+        name: databaseId
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: "value may be nil, or if non-nil, value must be a valid boolean\
+          \ string ('true' or 'false')."
+        explode: true
+        in: query
+        name: include
+        required: false
+        schema:
+          default: tables
+          type: string
+        style: form
+      - description: "will only include DBs for which the current user has data model\
+          \ editing permissions. (If include=tables, this also applies to the list\
+          \ of tables in each DB). Should only be used if Enterprise Edition code\
+          \ is available the advanced-permissions feature is enabled."
+        explode: true
+        in: query
+        name: include_editable_data_model
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: will only include DBs for which the current user can edit the
+          DB details. Has no effect unless Enterprise Edition code is available and
+          the advanced-permissions feature is enabled.
+        explode: true
+        in: query
+        name: exclude_uneditable_details
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
           description: successful operation
       summary: List Databases
       tags:

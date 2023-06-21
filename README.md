@@ -45,7 +45,7 @@ Auto-generated documentation is available here:
 - [ ] Database
   - [ ] DELETE /api/database/:id
   - [x] GET /api/database/
-  - [ ] GET /api/database/:id
+  - [x] GET /api/database/:id
   - [ ] GET /api/database/:id/autocomplete_suggestions
   - [ ] GET /api/database/:id/fields
   - [ ] GET /api/database/:id/idfields

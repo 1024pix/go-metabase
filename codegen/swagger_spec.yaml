@@ -13,16 +13,30 @@ paths:
         - database
       description: Fetch all Databases. include_tables means we should hydrate the Tables belonging to each DB. include_cards here means we should also include virtual Table entries for saved Questions, e.g. so we can easily use them as source Tables in queries. Default for both is false.
       parameters:
-        - name: include_tables
+        - name: include
+          in: query
+          description: value may be nil, or if non-nil, value must be a valid boolean string ('true' or 'false').
+          required: false
+          schema:
+            type: string
+            default: tables
+        - name: saved
           in: query
           description: value may be nil, or if non-nil, value must be a valid boolean string ('true' or 'false').
           required: false
           schema:
             type: boolean
             default: false
-        - name: include_cards
+        - name: include_editable_data_model
           in: query
-          description: value may be nil, or if non-nil, value must be a valid boolean string ('true' or 'false').
+          description: will only include DBs for which the current user has data model editing permissions. (If include=tables, this also applies to the list of tables in each DB). Should only be used if Enterprise Edition code is available the advanced-permissions feature is enabled.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: exclude_uneditable_details 
+          in: query
+          description: will only include DBs for which the current user can edit the DB details. Has no effect unless Enterprise Edition code is available and the advanced-permissions feature is enabled.
           required: false
           schema:
             type: boolean
@@ -34,6 +48,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatabaseList'
+  /api/database/{databaseId}:
+    get:
+      summary: Get a Database
+      operationId: getDatabase
+      tags:
+        - database
+      description: Fetch one Databases. include_tables means we should hydrate the Tables belonging to each DB. include_cards here means we should also include virtual Table entries for saved Questions, e.g. so we can easily use them as source Tables in queries. Default for both is false.
+      parameters:
+        - in: path
+          name: databaseId
+          required: true
+          schema:
+            type: integer
+            minimum: 1      
+          description: The database ID
+        - name: include
+          in: query
+          description: value may be nil, or if non-nil, value must be a valid boolean string ('true' or 'false').
+          required: false
+          schema:
+            type: string
+            default: tables
+        - name: include_editable_data_model
+          in: query
+          description: will only include DBs for which the current user has data model editing permissions. (If include=tables, this also applies to the list of tables in each DB). Should only be used if Enterprise Edition code is available the advanced-permissions feature is enabled.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: exclude_uneditable_details 
+          in: query
+          description: will only include DBs for which the current user can edit the DB details. Has no effect unless Enterprise Edition code is available and the advanced-permissions feature is enabled.
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
   /api/database/{databaseId}/metadata:
     get:
       summary: Get metadata about a Database.

@@ -14,7 +14,7 @@ func GetTableBySQLName(apiClient *metabase.APIClient, tableName string) (*metaba
 	}
 
 	request := apiClient.DatabaseApi.ListDatabases(context.Background())
-	request.IncludeTables(true)
+	request = request.Include("tables")
 
 	info, resp, err := apiClient.DatabaseApi.ListDatabasesExecute(request)
 	if err != nil {
