@@ -544,8 +544,8 @@ components:
     PermissionGraphData:
       type: object
       properties:
-        download:
-          type: object
-        data:
-          type: object
+        view-data:
+          type: string
+        create-queries:
+          type: string
 

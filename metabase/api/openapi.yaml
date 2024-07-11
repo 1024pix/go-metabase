@@ -123,7 +123,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Database'
           description: successful operation
-      summary: List Databases
+      summary: Get a Database
       tags:
       - database
   /api/database/{databaseId}/metadata:
@@ -1023,8 +1023,8 @@ components:
         groups:
           key:
             key:
-              download: "{}"
-              data: "{}"
+              create-queries: create-queries
+              view-data: view-data
         revision: 0
       properties:
         revision:
@@ -1038,11 +1038,11 @@ components:
       type: object
     PermissionGraphData:
       example:
-        download: "{}"
-        data: "{}"
+        create-queries: create-queries
+        view-data: view-data
       properties:
-        download:
-          type: object
-        data:
-          type: object
+        view-data:
+          type: string
+        create-queries:
+          type: string
       type: object

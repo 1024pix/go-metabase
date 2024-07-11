@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Download** | Pointer to **map[string]interface{}** |  | [optional] 
-**Data** | Pointer to **map[string]interface{}** |  | [optional] 
+**ViewData** | Pointer to **string** |  | [optional] 
+**CreateQueries** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -26,55 +26,55 @@ NewPermissionGraphDataWithDefaults instantiates a new PermissionGraphData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetDownload
+### GetViewData
 
-`func (o *PermissionGraphData) GetDownload() map[string]interface{}`
+`func (o *PermissionGraphData) GetViewData() string`
 
-GetDownload returns the Download field if non-nil, zero value otherwise.
+GetViewData returns the ViewData field if non-nil, zero value otherwise.
 
-### GetDownloadOk
+### GetViewDataOk
 
-`func (o *PermissionGraphData) GetDownloadOk() (*map[string]interface{}, bool)`
+`func (o *PermissionGraphData) GetViewDataOk() (*string, bool)`
 
-GetDownloadOk returns a tuple with the Download field if it's non-nil, zero value otherwise
+GetViewDataOk returns a tuple with the ViewData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDownload
+### SetViewData
 
-`func (o *PermissionGraphData) SetDownload(v map[string]interface{})`
+`func (o *PermissionGraphData) SetViewData(v string)`
 
-SetDownload sets Download field to given value.
+SetViewData sets ViewData field to given value.
 
-### HasDownload
+### HasViewData
 
-`func (o *PermissionGraphData) HasDownload() bool`
+`func (o *PermissionGraphData) HasViewData() bool`
 
-HasDownload returns a boolean if a field has been set.
+HasViewData returns a boolean if a field has been set.
 
-### GetData
+### GetCreateQueries
 
-`func (o *PermissionGraphData) GetData() map[string]interface{}`
+`func (o *PermissionGraphData) GetCreateQueries() string`
 
-GetData returns the Data field if non-nil, zero value otherwise.
+GetCreateQueries returns the CreateQueries field if non-nil, zero value otherwise.
 
-### GetDataOk
+### GetCreateQueriesOk
 
-`func (o *PermissionGraphData) GetDataOk() (*map[string]interface{}, bool)`
+`func (o *PermissionGraphData) GetCreateQueriesOk() (*string, bool)`
 
-GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
+GetCreateQueriesOk returns a tuple with the CreateQueries field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetData
+### SetCreateQueries
 
-`func (o *PermissionGraphData) SetData(v map[string]interface{})`
+`func (o *PermissionGraphData) SetCreateQueries(v string)`
 
-SetData sets Data field to given value.
+SetCreateQueries sets CreateQueries field to given value.
 
-### HasData
+### HasCreateQueries
 
-`func (o *PermissionGraphData) HasData() bool`
+`func (o *PermissionGraphData) HasCreateQueries() bool`
 
-HasData returns a boolean if a field has been set.
+HasCreateQueries returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
