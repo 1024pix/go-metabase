@@ -1,10 +1,10 @@
 #perl -p -i -e 's/\s+\[Beta\]\s*$/\n/g' swagger_spec.yaml
 
-if ! command -v java &> /dev/null
-then
-    echo "You must install Java before run this script"
-    exit
-fi
+#if ! command -v java &> /dev/null
+#then
+#    echo "You must install Java before run this script"
+#    exit
+#fi
 
 if [ ! -f openapi-generator-cli.jar ]; then
   curl --output openapi-generator-cli.jar -L https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.6.0/openapi-generator-cli-6.6.0.jar
@@ -22,7 +22,7 @@ java -jar openapi-generator-cli.jar generate \
   --git-user-id "${GITHUB_USER}" \
   --additional-properties=packageName=metabase
 # perl -p -i -e 's/(\[\]\[\]\S+)/[][]interface{}/g' metabase/model_dataset_query_results_data.go
-echo -e "\n\nfunc (apiClient *APIClient) HTTPClient() *http.Client { return apiClient.cfg.HTTPClient }" >> metabase/client.go
+printf "\n\nfunc (apiClient *APIClient) HTTPClient() *http.Client { return apiClient.cfg.HTTPClient }" >> metabase/client.go
 gofmt -s -w metabase/*.go
 
 rm -rf metabase/test
