@@ -5,7 +5,7 @@ All URIs are relative to *http://example.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DatabaseMetadata**](DatabaseApi.md#DatabaseMetadata) | **Get** /api/database/{databaseId}/metadata | Get metadata about a Database.
-[**GetDatabase**](DatabaseApi.md#GetDatabase) | **Get** /api/database/{databaseId} | List Databases
+[**GetDatabase**](DatabaseApi.md#GetDatabase) | **Get** /api/database/{databaseId} | Get a Database
 [**ListDatabases**](DatabaseApi.md#ListDatabases) | **Get** /api/database | List Databases
 
 
@@ -88,7 +88,7 @@ No authorization required
 
 > Database GetDatabase(ctx, databaseId).Include(include).IncludeEditableDataModel(includeEditableDataModel).ExcludeUneditableDetails(excludeUneditableDetails).Execute()
 
-List Databases
+Get a Database
 
 
 

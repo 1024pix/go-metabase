@@ -19,8 +19,8 @@ var _ MappedNullable = &PermissionGraphData{}
 
 // PermissionGraphData struct for PermissionGraphData
 type PermissionGraphData struct {
-	Download map[string]interface{} `json:"download,omitempty"`
-	Data     map[string]interface{} `json:"data,omitempty"`
+	ViewData      *string `json:"view-data,omitempty"`
+	CreateQueries *string `json:"create-queries,omitempty"`
 }
 
 // NewPermissionGraphData instantiates a new PermissionGraphData object
@@ -40,68 +40,68 @@ func NewPermissionGraphDataWithDefaults() *PermissionGraphData {
 	return &this
 }
 
-// GetDownload returns the Download field value if set, zero value otherwise.
-func (o *PermissionGraphData) GetDownload() map[string]interface{} {
-	if o == nil || IsNil(o.Download) {
-		var ret map[string]interface{}
+// GetViewData returns the ViewData field value if set, zero value otherwise.
+func (o *PermissionGraphData) GetViewData() string {
+	if o == nil || IsNil(o.ViewData) {
+		var ret string
 		return ret
 	}
-	return o.Download
+	return *o.ViewData
 }
 
-// GetDownloadOk returns a tuple with the Download field value if set, nil otherwise
+// GetViewDataOk returns a tuple with the ViewData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionGraphData) GetDownloadOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Download) {
-		return map[string]interface{}{}, false
+func (o *PermissionGraphData) GetViewDataOk() (*string, bool) {
+	if o == nil || IsNil(o.ViewData) {
+		return nil, false
 	}
-	return o.Download, true
+	return o.ViewData, true
 }
 
-// HasDownload returns a boolean if a field has been set.
-func (o *PermissionGraphData) HasDownload() bool {
-	if o != nil && !IsNil(o.Download) {
+// HasViewData returns a boolean if a field has been set.
+func (o *PermissionGraphData) HasViewData() bool {
+	if o != nil && !IsNil(o.ViewData) {
 		return true
 	}
 
 	return false
 }
 
-// SetDownload gets a reference to the given map[string]interface{} and assigns it to the Download field.
-func (o *PermissionGraphData) SetDownload(v map[string]interface{}) {
-	o.Download = v
+// SetViewData gets a reference to the given string and assigns it to the ViewData field.
+func (o *PermissionGraphData) SetViewData(v string) {
+	o.ViewData = &v
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
-func (o *PermissionGraphData) GetData() map[string]interface{} {
-	if o == nil || IsNil(o.Data) {
-		var ret map[string]interface{}
+// GetCreateQueries returns the CreateQueries field value if set, zero value otherwise.
+func (o *PermissionGraphData) GetCreateQueries() string {
+	if o == nil || IsNil(o.CreateQueries) {
+		var ret string
 		return ret
 	}
-	return o.Data
+	return *o.CreateQueries
 }
 
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// GetCreateQueriesOk returns a tuple with the CreateQueries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionGraphData) GetDataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Data) {
-		return map[string]interface{}{}, false
+func (o *PermissionGraphData) GetCreateQueriesOk() (*string, bool) {
+	if o == nil || IsNil(o.CreateQueries) {
+		return nil, false
 	}
-	return o.Data, true
+	return o.CreateQueries, true
 }
 
-// HasData returns a boolean if a field has been set.
-func (o *PermissionGraphData) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
+// HasCreateQueries returns a boolean if a field has been set.
+func (o *PermissionGraphData) HasCreateQueries() bool {
+	if o != nil && !IsNil(o.CreateQueries) {
 		return true
 	}
 
 	return false
 }
 
-// SetData gets a reference to the given map[string]interface{} and assigns it to the Data field.
-func (o *PermissionGraphData) SetData(v map[string]interface{}) {
-	o.Data = v
+// SetCreateQueries gets a reference to the given string and assigns it to the CreateQueries field.
+func (o *PermissionGraphData) SetCreateQueries(v string) {
+	o.CreateQueries = &v
 }
 
 func (o PermissionGraphData) MarshalJSON() ([]byte, error) {
@@ -114,11 +114,11 @@ func (o PermissionGraphData) MarshalJSON() ([]byte, error) {
 
 func (o PermissionGraphData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Download) {
-		toSerialize["download"] = o.Download
+	if !IsNil(o.ViewData) {
+		toSerialize["view-data"] = o.ViewData
 	}
-	if !IsNil(o.Data) {
-		toSerialize["data"] = o.Data
+	if !IsNil(o.CreateQueries) {
+		toSerialize["create-queries"] = o.CreateQueries
 	}
 	return toSerialize, nil
 }

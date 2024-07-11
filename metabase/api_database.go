@@ -181,7 +181,7 @@ func (r ApiGetDatabaseRequest) Execute() (*Database, *http.Response, error) {
 }
 
 /*
-GetDatabase List Databases
+GetDatabase Get a Database
 
 Fetch one Databases. include_tables means we should hydrate the Tables belonging to each DB. include_cards here means we should also include virtual Table entries for saved Questions, e.g. so we can easily use them as source Tables in queries. Default for both is false.
 
