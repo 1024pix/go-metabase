@@ -28,3 +28,4 @@ _*
 .env
 *.jar
 main
+.vscode
