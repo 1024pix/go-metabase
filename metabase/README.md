@@ -107,6 +107,8 @@ Class | Method | HTTP request | Description
  - [DatasetQueryResultsMetadataColumn](docs/DatasetQueryResultsMetadataColumn.md)
  - [DatasetQueryResultsNativeForm](docs/DatasetQueryResultsNativeForm.md)
  - [PermissionGraphData](docs/PermissionGraphData.md)
+ - [PermissionGraphDataCreateQueries](docs/PermissionGraphDataCreateQueries.md)
+ - [PermissionGraphDataCreateQueriesOneOfValue](docs/PermissionGraphDataCreateQueriesOneOfValue.md)
  - [PermissionGroup](docs/PermissionGroup.md)
  - [PermissionsGraph](docs/PermissionsGraph.md)
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ViewData** | Pointer to **string** |  | [optional] 
-**CreateQueries** | Pointer to **string** |  | [optional] 
+**CreateQueries** | Pointer to [**PermissionGraphDataCreateQueries**](PermissionGraphDataCreateQueries.md) |  | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasViewData returns a boolean if a field has been set.
 
 ### GetCreateQueries
 
-`func (o *PermissionGraphData) GetCreateQueries() string`
+`func (o *PermissionGraphData) GetCreateQueries() PermissionGraphDataCreateQueries`
 
 GetCreateQueries returns the CreateQueries field if non-nil, zero value otherwise.
 
 ### GetCreateQueriesOk
 
-`func (o *PermissionGraphData) GetCreateQueriesOk() (*string, bool)`
+`func (o *PermissionGraphData) GetCreateQueriesOk() (*PermissionGraphDataCreateQueries, bool)`
 
 GetCreateQueriesOk returns a tuple with the CreateQueries field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreateQueries
 
-`func (o *PermissionGraphData) SetCreateQueries(v string)`
+`func (o *PermissionGraphData) SetCreateQueries(v PermissionGraphDataCreateQueries)`
 
 SetCreateQueries sets CreateQueries field to given value.
 

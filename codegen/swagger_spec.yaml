@@ -547,5 +547,12 @@ components:
         view-data:
           type: string
         create-queries:
-          type: string
-
+          oneOf:
+            - type: string
+            - type: object
+              additionalProperties:
+                oneOf:
+                  - type: string
+                  - type: object
+                    additionalProperties:
+                      type: string

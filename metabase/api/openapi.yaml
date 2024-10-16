@@ -1023,7 +1023,7 @@ components:
         groups:
           key:
             key:
-              create-queries: create-queries
+              create-queries: null
               view-data: view-data
         revision: 0
       properties:
@@ -1038,11 +1038,23 @@ components:
       type: object
     PermissionGraphData:
       example:
-        create-queries: create-queries
+        create-queries: null
         view-data: view-data
       properties:
         view-data:
           type: string
         create-queries:
-          type: string
+          $ref: '#/components/schemas/PermissionGraphData_create_queries'
       type: object
+    PermissionGraphData_create_queries_oneOf_value:
+      oneOf:
+      - type: string
+      - additionalProperties:
+          type: string
+        type: object
+    PermissionGraphData_create_queries:
+      oneOf:
+      - type: string
+      - additionalProperties:
+          $ref: '#/components/schemas/PermissionGraphData_create_queries_oneOf_value'
+        type: object

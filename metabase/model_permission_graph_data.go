@@ -19,8 +19,8 @@ var _ MappedNullable = &PermissionGraphData{}
 
 // PermissionGraphData struct for PermissionGraphData
 type PermissionGraphData struct {
-	ViewData      *string `json:"view-data,omitempty"`
-	CreateQueries *string `json:"create-queries,omitempty"`
+	ViewData      *string                           `json:"view-data,omitempty"`
+	CreateQueries *PermissionGraphDataCreateQueries `json:"create-queries,omitempty"`
 }
 
 // NewPermissionGraphData instantiates a new PermissionGraphData object
@@ -73,9 +73,9 @@ func (o *PermissionGraphData) SetViewData(v string) {
 }
 
 // GetCreateQueries returns the CreateQueries field value if set, zero value otherwise.
-func (o *PermissionGraphData) GetCreateQueries() string {
+func (o *PermissionGraphData) GetCreateQueries() PermissionGraphDataCreateQueries {
 	if o == nil || IsNil(o.CreateQueries) {
-		var ret string
+		var ret PermissionGraphDataCreateQueries
 		return ret
 	}
 	return *o.CreateQueries
@@ -83,7 +83,7 @@ func (o *PermissionGraphData) GetCreateQueries() string {
 
 // GetCreateQueriesOk returns a tuple with the CreateQueries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionGraphData) GetCreateQueriesOk() (*string, bool) {
+func (o *PermissionGraphData) GetCreateQueriesOk() (*PermissionGraphDataCreateQueries, bool) {
 	if o == nil || IsNil(o.CreateQueries) {
 		return nil, false
 	}
@@ -99,8 +99,8 @@ func (o *PermissionGraphData) HasCreateQueries() bool {
 	return false
 }
 
-// SetCreateQueries gets a reference to the given string and assigns it to the CreateQueries field.
-func (o *PermissionGraphData) SetCreateQueries(v string) {
+// SetCreateQueries gets a reference to the given PermissionGraphDataCreateQueries and assigns it to the CreateQueries field.
+func (o *PermissionGraphData) SetCreateQueries(v PermissionGraphDataCreateQueries) {
 	o.CreateQueries = &v
 }
 

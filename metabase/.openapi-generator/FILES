@@ -30,6 +30,8 @@ docs/DatasetQueryResultsMetadata.md
 docs/DatasetQueryResultsMetadataColumn.md
 docs/DatasetQueryResultsNativeForm.md
 docs/PermissionGraphData.md
+docs/PermissionGraphDataCreateQueries.md
+docs/PermissionGraphDataCreateQueriesOneOfValue.md
 docs/PermissionGroup.md
 docs/PermissionsApi.md
 docs/PermissionsGraph.md
@@ -56,6 +58,8 @@ model_dataset_query_results_metadata.go
 model_dataset_query_results_metadata_column.go
 model_dataset_query_results_native_form.go
 model_permission_graph_data.go
+model_permission_graph_data_create_queries.go
+model_permission_graph_data_create_queries_one_of_value.go
 model_permission_group.go
 model_permissions_graph.go
 response.go
