@@ -462,8 +462,11 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		return nil
 	}
 	if jsonCheck.MatchString(contentType) {
+		fmt.Println("JSON type ...")
 		if actualObj, ok := v.(interface{ GetActualInstance() interface{} }); ok { // oneOf, anyOf schemas
+			fmt.Println("instance ...")
 			if unmarshalObj, ok := actualObj.(interface{ UnmarshalJSON([]byte) error }); ok { // make sure it has UnmarshalJSON defined
+				fmt.Println("unmarshalled ...")
 				if err = unmarshalObj.UnmarshalJSON(b); err != nil {
 					return err
 				}
@@ -471,6 +474,7 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 				return errors.New("Unknown type with GetActualInstance but no unmarshalObj.UnmarshalJSON defined")
 			}
 		} else if err = json.Unmarshal(b, v); err != nil { // simple model
+			fmt.Println(actualObj)
 			return err
 		}
 		return nil
