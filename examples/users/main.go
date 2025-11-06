@@ -52,9 +52,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// rdm debug
-	fmt.Printf("apiClient : %v \n",*apiClient)
-
 	err = printUsers(apiClient)
 	if err != nil {
 		log.Fatal(err)
@@ -73,10 +70,7 @@ func printUsers(apiClient *metabase.APIClient) error {
 		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
 	}
 
-	fmt.Printf("Users : %v \n",users)
-
 	for _, user := range users.Data {
-		// fmt.Printf("user : %v \n",*user)
 		fmt.Printf("ID [%v] EMAIL [%v] COMMON NAME [%v]\n", *user.Id, *user.Email, *user.CommonName)
 	}
 	return nil

@@ -61,11 +61,6 @@ func (c *APIClient) GetUsers(ctx context.Context) (*Users, *http.Response, error
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	// for debug
-	fmt.Printf("HTTP response : %v \n",*localVarHTTPResponse)
-	fmt.Printf("HTTP Code : %v \n",localVarHTTPResponse.Status)
-	fmt.Println(string(localVarBody)) // OK
-
 	err = c.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{

@@ -22,7 +22,7 @@ type User struct {
 	PersonalCollectionID  		*int32		`json:"personal_collection_id,omitempty"`
 	IsQbnewb  					*bool		`json:"is_qbnewb,omitempty"`
 	JwtAttributes  				*string		`json:"jwt_attributes,omitempty"`
-	LoginAttributes  			*string		`json:"login_attributes,omitempty"`
+	// LoginAttributes  			*struct		`json:"login_attributes,omitempty"`
 	Tenant_id  					*string		`json:"tenant_id,omitempty"`
 	SSOSource  					*string		`json:"sso_source,omitempty"`
 }
@@ -93,9 +93,9 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.JwtAttributes) {
 		toSerialize["jwt_attributes"] = o.JwtAttributes
 	}
-	if !IsNil(o.LoginAttributes) {
-		toSerialize["login_attributes"] = o.LoginAttributes
-	}
+	// if !IsNil(o.LoginAttributes) {
+	// 	toSerialize["login_attributes"] = o.LoginAttributes
+	// }
 	if !IsNil(o.Tenant_id) {
 		toSerialize["tenant_id"] = o.Tenant_id
 	}
