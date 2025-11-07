@@ -11,24 +11,33 @@ API version: 1.0.0
 package metabase
 
 import (
-	// "bytes"
+	"strings"
 	"context"
 	"io"
 	"net/http"
-	// "net/url"
+	"net/url"
 	"fmt"
 )
 
 // params : 
-// * status= Type: string
-// * query= Type: string
-// * group_id = Type: integer min: 1 (value must be an integer greater than zero.)
-// * include_deactivated= Type: boolean default: false
 
-func (c *APIClient) GetUsers(ctx context.Context) (*Users, *http.Response, error){
+
+/*
+ListUsers List Users
+
+Fetch all Users. Future optimization may include query params : 
+    * status= Type: string
+    * query= Type: string
+    * group_id = Type: integer min: 1 (value must be an integer greater than zero.)
+    * include_deactivated= Type: boolean default: false
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return Users, response, error
+*/
+func (c *APIClient) ListUsers(ctx context.Context) (*Users, *http.Response, error){
 	var localVarReturnValue *Users
 
-	localBasePath, err := c.cfg.ServerURLWithContext(ctx, "GetUsers") // this looks optional
+	localBasePath, err := c.cfg.ServerURLWithContext(ctx, "ListUsers") // this looks optional
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -40,6 +49,63 @@ func (c *APIClient) GetUsers(ctx context.Context) (*Users, *http.Response, error
 	// I do have an APIClient
 	// apiClient, _, err := metabaseutil.NewApiClient(clientCfg)
 	// here i could be using an API service with callAPI() method
+	localVarHTTPResponse, err := c.cfg.HTTPClient.Do(req) 
+
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	defer localVarHTTPResponse.Body.Close()
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = c.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		fmt.Errorf("Bad decoding")
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+
+/*
+GetUser Get a User
+
+Fetch one User.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId The user ID
+	@return User, response, error
+*/
+func (c *APIClient) GetUser(ctx context.Context, userId int32) (*User, *http.Response, error){
+	var localVarReturnValue *User
+
+	localBasePath, err := c.cfg.ServerURLWithContext(ctx, "GetUser") // this looks optional
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/user/{userId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(userId, "userId")), -1)
+
+	req, _ := http.NewRequest("GET", localVarPath, nil)
+
 	localVarHTTPResponse, err := c.cfg.HTTPClient.Do(req) 
 
 	if err != nil || localVarHTTPResponse == nil {

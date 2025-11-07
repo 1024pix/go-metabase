@@ -65,6 +65,10 @@ Auto-generated documentation is available here:
   - [x] GET /api/permissions/graph
   - [x] GET /api/permissions/group
 
+- Permission
+  - [x] GET /api/user
+  - [x] GET /api/user/:id
+
 ## References
 
 * Using the REST API
