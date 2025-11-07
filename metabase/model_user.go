@@ -22,7 +22,7 @@ type User struct {
 	PersonalCollectionID  		*int32		`json:"personal_collection_id,omitempty"`
 	IsQbnewb  					*bool		`json:"is_qbnewb,omitempty"`
 	JwtAttributes  				*string		`json:"jwt_attributes,omitempty"`
-	// LoginAttributes  			*struct		`json:"login_attributes,omitempty"`
+	// LoginAttributes  		*struct		`json:"login_attributes,omitempty"`
 	Tenant_id  					*string		`json:"tenant_id,omitempty"`
 	SSOSource  					*string		`json:"sso_source,omitempty"`
 }

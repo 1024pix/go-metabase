@@ -57,13 +57,18 @@ func main() {
 		log.Fatal(err)
 	}
 
+	err = printFirstUser(apiClient)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	fmt.Println("DONE")
 }
 
 
 func printUsers(apiClient *metabase.APIClient) error {
 
-	users, resp, err := apiClient.GetUsers(context.Background())
+	users, resp, err := apiClient.ListUsers(context.Background())
 	if err != nil {
 		return err
 	} else if resp.StatusCode >= 300 {
@@ -73,5 +78,20 @@ func printUsers(apiClient *metabase.APIClient) error {
 	for _, user := range users.Data {
 		fmt.Printf("ID [%v] EMAIL [%v] COMMON NAME [%v]\n", *user.Id, *user.Email, *user.CommonName)
 	}
+	return nil
+}
+
+func printFirstUser(apiClient *metabase.APIClient) error {
+
+	fmt.Println("Print First user : ")
+
+	user, resp, err := apiClient.GetUser(context.Background(),1)
+	if err != nil {
+		return err
+	} else if resp.StatusCode >= 300 {
+		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
+	}
+
+	fmt.Printf("ID [%v] EMAIL [%v] COMMON NAME [%v]\n", *user.Id, *user.Email, *user.CommonName)
 	return nil
 }
