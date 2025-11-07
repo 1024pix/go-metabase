@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
  - [PermissionGraphData](docs/PermissionGraphData.md)
  - [PermissionGroup](docs/PermissionGroup.md)
  - [PermissionsGraph](docs/PermissionsGraph.md)
+ - [User](docs/User.md)
 
 
 ## Documentation For Authorization
