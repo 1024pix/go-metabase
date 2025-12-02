@@ -17,7 +17,7 @@ type User struct {
 	IsActive  					*bool		`json:"is_active,omitempty"`
 	UpdatedAt  					*time.Time	`json:"updated_at,omitempty"`
 	DateJoined  				*time.Time	`json:"date_joined,omitempty"`
-	GroupIDs  					[]int32		`json:"group_ids,omitempty"`
+	GroupIDs  					*[]int32	`json:"group_ids,omitempty"`
 	IsSuperuser  				*bool		`json:"is_superuser,omitempty"`
 	PersonalCollectionID  		*int32		`json:"personal_collection_id,omitempty"`
 	IsQbnewb  					*bool		`json:"is_qbnewb,omitempty"`

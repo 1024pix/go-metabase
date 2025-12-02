@@ -76,7 +76,7 @@ func printUsers(apiClient *metabase.APIClient) error {
 	}
 
 	for _, user := range users.Data {
-		fmt.Printf("ID [%v] EMAIL [%v] COMMON NAME [%v]\n", *user.Id, *user.Email, *user.CommonName)
+		fmt.Printf("ID [%v] EMAIL [%v] COMMON NAME [%v]\n - Group IDs : %v \n", *user.Id, *user.Email, *user.CommonName, *user.GroupIDs)
 	}
 	return nil
 }
