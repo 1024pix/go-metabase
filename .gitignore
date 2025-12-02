@@ -6,6 +6,7 @@
 # Folders
 _obj
 _test
+.DS_Store
 
 # Architecture specific extensions/prefixes
 *.[568vq]
@@ -30,3 +31,4 @@ _*
 main
 .vscode
 *.json
+.gemini
