@@ -85,8 +85,15 @@ Auto-generated documentation is available here:
 * https://github.com/metabase/metabase/issues/2683
 * https://github.com/metabase/metabase/issues/5635
 
-* Current User: `curl -XGET 'http://server/api/user/current' -H 'X-Metabase-Session: 38f4939c-ad7f-4cbe-ae54-30946daf8593'`
-* Table: `curl -XGET 'https://base_url/api/table/1' -H 'X-Metabase-Session: 11112222-3333-4444-5555-666677778888'`
+  * Get session id:
+``` shell
+SESSION_ID=$(curl -X POST \
+-H "Content-Type: application/json" \
+-d '{"username": "<username>", "password": "<password>"}' \
+https://<server>/api/session | jq -r .id)
+```
+* Current User: `curl -XGET 'http://<server>/api/user/current' -H "X-Metabase-Session: $SESSION_ID"`
+* Table: `curl -XGET 'https://<server>/api/table/1' -H "X-Metabase-Session: $SESSION_ID"`
 
 Describe columns and column types:
 
