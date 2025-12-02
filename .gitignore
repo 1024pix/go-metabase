@@ -30,3 +30,6 @@ _*
 main
 .vscode
 *.json
+
+# IDE
+**/.idea
