@@ -19,9 +19,10 @@ var _ MappedNullable = &PermissionGroup{}
 
 // PermissionGroup struct for PermissionGroup
 type PermissionGroup struct {
-	Id          *int32  `json:"id,omitempty"`
-	Name        *string `json:"name,omitempty"`
-	MemberCount *int32  `json:"member_count,omitempty"`
+	Id          *int32   `json:"id,omitempty"`
+	Name        *string  `json:"name,omitempty"`
+	MemberCount *int32   `json:"member_count,omitempty"`
+	Members     *[]User  `json:"members,omitempty"`
 }
 
 // NewPermissionGroup instantiates a new PermissionGroup object
@@ -155,6 +156,9 @@ func (o PermissionGroup) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MemberCount) {
 		toSerialize["member_count"] = o.MemberCount
+	}
+	if !IsNil(o.Members) {
+		toSerialize["members"] = o.Members
 	}
 	return toSerialize, nil
 }

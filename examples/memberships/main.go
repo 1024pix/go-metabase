@@ -52,12 +52,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = printUsers(apiClient)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = printFirstUser(apiClient)
+	err = printMemberships(apiClient)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -66,32 +61,21 @@ func main() {
 }
 
 
-func printUsers(apiClient *metabase.APIClient) error {
+func printMemberships(apiClient *metabase.APIClient) error {
 
-	users, resp, err := apiClient.ListUsers(context.Background())
+	memberships, resp, err := apiClient.ListMemberships(context.Background())
 	if err != nil {
 		return err
 	} else if resp.StatusCode >= 300 {
 		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
 	}
 
-	for _, user := range users.Data {
-		fmt.Printf("ID [%v] EMAIL [%v] COMMON NAME [%v]\n - Group IDs : %v \n", *user.Id, *user.Email, *user.CommonName, *user.GroupIDs)
+	for userID, membershipSlice := range *memberships {
+		for _, membership := range membershipSlice {
+			// smth is off here bc it sees ints
+			fmt.Printf("ID [%v] Member of : [%v|%v] (manager=%v)\n", userID, *membership.GroupID, *membership.UserID, *membership.IsGroupManager)
+		}
 	}
 	return nil
 }
 
-func printFirstUser(apiClient *metabase.APIClient) error {
-
-	fmt.Println("Print First user : ")
-
-	user, resp, err := apiClient.GetUser(context.Background(),1)
-	if err != nil {
-		return err
-	} else if resp.StatusCode >= 300 {
-		return fmt.Errorf("Status Code [%v]", resp.StatusCode)
-	}
-
-	fmt.Printf("ID [%v] EMAIL [%v] COMMON NAME [%v]\n", *user.Id, *user.Email, *user.CommonName)
-	return nil
-}

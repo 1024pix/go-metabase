@@ -64,6 +64,7 @@ Auto-generated documentation is available here:
 - Permission
   - [x] GET /api/permissions/graph
   - [x] GET /api/permissions/group
+  - [x] GET /api/permissions/group/:id
 
 - Permission
   - [x] GET /api/user
